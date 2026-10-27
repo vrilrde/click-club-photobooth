@@ -70,7 +70,7 @@
         curtain: 'repeating-conic-gradient(#ffffff 0 25%, #f4b6c4 0 50%) 0 0 / 22px 22px',
         ink: '#ffe8ee', muted: '#f2a7b6', accent: '#ffd1dc', 'accent-ink': '#5a0a17', paper: '#fff8f9', flashc: '#ffffff',
         display: "'Lobster', 'Brush Script MT', cursive", 'disp-style': 'normal', 'disp-weight': '400', 'disp-case': 'none', 'disp-track': '0.01em' } },
-    { id: 'lace-lullaby', name: 'Lace & Lullaby', artist: 'Laufey', caption: 'a little old-fashioned',
+    { id: 'lace-lullaby', name: 'Jazz & Lullaby', artist: 'Laufey', caption: 'a little old-fashioned',
       moods: [['Romance', 5], ['Coziness', 4]],
       bg: '#EAF1F9', ink: '#1F3A5F',
       doodles: ['bow', 'note', 'cup', 'moon'],

@@ -24,6 +24,7 @@ button { font: inherit; color: inherit; }
 .lib-info { position: absolute; z-index: 2; top: 22px; left: var(--gutter); width: min(330px, 40vw); transition: opacity .35s ease; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; padding: 4px 0; }
 .brand:hover { color: var(--ink); }
+.brand-icon { display: block; width: 40px; height: 40px; margin: -6px -4px -6px -6px; }
 .brand-word { font-family: var(--serif); font-size: 26px; font-style: italic; font-weight: 700; letter-spacing: -.02em; white-space: nowrap; }
 .brand-tag { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; border: 1.5px solid var(--ink); border-radius: 99px; padding: 3px 8px; }
 .lib-name { margin: 14px 0 14px; font-family: var(--serif); font-weight: 500; font-size: clamp(30px, 4vw, 54px); line-height: .95; letter-spacing: -.02em; text-transform: uppercase; text-wrap: balance; }
