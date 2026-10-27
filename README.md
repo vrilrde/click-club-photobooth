@@ -4,11 +4,11 @@ Click Club is an online photobooth. Pick an album-era booth, step inside, take p
 
 ## Run it
 
-Open `landing-page.html` in a browser. No build step or install needed. The camera works on `localhost`, on `https://`, or from a local file in most browsers.
+Open `index.html` in a browser. No build step or install needed. The camera works on `localhost`, on `https://`, or from a local file in most browsers.
 
 ## Files
 
-- `landing-page.html`: the booth library (hero) and how-it-works section
+- `index.html`: the booth library (hero) and how-it-works section
 - `photobooth-row.html`: the booth, camera, strip cuts, printing and saving
 - `css/`: styles for each page
 - `js/eras.js`: the eight era themes both pages read

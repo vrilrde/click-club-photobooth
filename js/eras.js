@@ -116,5 +116,5 @@
         display: "'Gaegu', 'Comic Sans MS', cursive", 'disp-style': 'normal', 'disp-weight': '700', 'disp-case': 'none', 'disp-track': '0' } }
   ];
 
-  window.CLICK_CLUB = { eras: ERAS, doodles: DOODLES, booth: 'photobooth-row.html', home: 'landing-page.html' };
+  window.CLICK_CLUB = { eras: ERAS, doodles: DOODLES, booth: 'photobooth-row.html', home: 'index.html' };
 })();
