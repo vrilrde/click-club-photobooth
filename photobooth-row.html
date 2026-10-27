@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Click Club</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Caveat:wght@500;700&family=Permanent+Marker&family=Fraunces:ital,opsz,wght@1,9..144,600&family=Fredoka:wght@700&family=Lobster&family=Cormorant+Garamond:ital,wght@1,600&family=Rye&family=Special+Elite&family=Gaegu:wght@700&display=swap">
+<link rel="stylesheet" href="css/booth.css">
+<script>try { if (sessionStorage.getItem('cc-arrive')) document.documentElement.classList.add('arrive'); } catch (e) {}</script>
+</head>
+<body>
+<main class="stage" id="stage">
+  <div class="rig" id="rig">
+    <div class="cam" id="cam">
+      <div class="wall" id="wall"></div>
+      <div class="floor"></div>
+      <div class="shadow"></div>
+      <div class="env p3" id="particles"></div>
+
+      <div class="booth" id="booth">
+        <div class="face f-back"></div>
+        <div class="face f-left"></div>
+        <div class="face f-top"></div>
+        <div class="face f-right">
+          <div class="screen"><b>Smile</b><small>IN 3</small></div>
+          <div class="coin"><i></i></div>
+          <div class="slot"><small>STRIPS HERE</small><i></i></div>
+        </div>
+        <div class="face f-front">
+          <div class="band">
+            <div class="bulbs" id="bulbsA"></div>
+            <p class="band-title">Photo Booth</p>
+            <div class="bulbs" id="bulbsB"></div>
+          </div>
+          <div class="opening">
+            <div class="o-lens"></div>
+            <div class="o-seat"></div>
+            <div class="o-post"></div>
+            <div class="curtain l" id="curL"></div>
+            <div class="curtain r" id="curR"></div>
+          </div>
+          <div class="rod"></div>
+          <div class="panel"><p>4 FLASHES · 1 STRIP</p></div>
+          <button class="hit" id="hit" aria-label="Step inside the booth"></button>
+        </div>
+        <div class="face sign"><span>Photos</span></div>
+        <div class="face leg l"></div>
+        <div class="face leg r"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hud" id="hud">
+    <div class="hud-top">
+      <header class="hud-head">
+        <p class="eyebrow" id="eyebrow">Inspired by Olivia Rodrigo</p>
+        <h1 class="name" id="name">Glitter &amp; Grudges</h1>
+        <p class="tag" id="tag">4 shots, zero regrets</p>
+      </header>
+      <a class="back" id="back" href="landing-page.html#eras">← ALL ARTIST'S BOOTH</a>
+    </div>
+    <div class="hud-foot">
+      <button class="go" id="goBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7l1.5-3h5L16 7"></path><circle cx="12" cy="13.5" r="3.5"></circle></svg>
+        Step inside
+      </button>
+      <nav class="switch" id="switch" aria-label="Choose a booth"></nav>
+    </div>
+  </div>
+
+  <section class="inside" id="inside" aria-hidden="true" aria-label="Inside the booth">
+    <div class="drape l"></div><div class="drape r"></div>
+    <div class="in-top"><p class="eyebrow" id="inName">Glitter &amp; Grudges</p><p class="shot" id="shot" aria-live="polite"></p></div>
+    <div class="in-mid">
+      <div class="lens-block" id="lensBlock">
+        <div class="vf" id="vf">
+          <video id="video" playsinline muted autoplay></video>
+          <img class="still" id="still" alt="">
+          <span class="rec" aria-hidden="true"></span>
+          <div class="vf-msg" id="vfMsg" role="status" hidden><span id="vfMsgText"></span><button class="btn ghost" id="camRetry" type="button" hidden>Try again</button></div>
+          <span class="count" id="count" aria-hidden="true"></span>
+        </div>
+        <ol class="thumbs" id="thumbs" aria-label="Shots taken"></ol>
+        <div class="cuts" id="cuts" role="group" aria-label="Choose your cut"></div>
+        <h2 id="inTitle">Pick a cut, then look into the lens</h2>
+      </div>
+      <div class="print-zone" id="printZone">
+        <div class="printer" aria-hidden="true"><div class="pr-top"></div><div class="pr-face"><span class="pr-led"></span><span class="pr-label">CLICK CLUB · PRINTING</span><div class="pr-slot"></div></div></div>
+        <div class="feed"><div class="strip" id="strip" role="img" aria-label="Your photo strip"></div></div>
+      </div>
+    </div>
+    <div class="in-actions">
+      <button class="btn primary" id="shootBtn" type="button">Take photos</button>
+      <button class="btn ghost" id="saveBtn" type="button" hidden>Save strip</button>
+      <button class="btn ghost" id="outBtn" type="button">Step out</button>
+    </div>
+    <div class="flash" id="flash"></div>
+  </section>
+</main>
+
+<script src="js/eras.js"></script>
+<script src="js/booth.js"></script>
+</body>
+</html>
