@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Click Club · Album-era photobooths</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..800;1,400..800&family=Caveat:wght@500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Permanent+Marker&family=Fraunces:ital,opsz,wght@1,9..144,600&family=Fredoka:wght@700&family=Lobster&family=Cormorant+Garamond:ital,wght@1,600&family=Rye&family=Special+Elite&family=Gaegu:wght@700&display=swap">
+<link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+<div id="top">
+
+<main>
+<section id="eras" class="lib" aria-labelledby="libTitle">
+  <div class="lib-stage" id="libStage">
+    <h1 class="sr" id="libTitle">Click Club: a library of album-era photobooths</h1>
+    <div class="lib-world" id="libWorld"><div class="lib-track" id="libTrack"></div></div>
+    <div class="lib-fade" id="libFade" aria-hidden="true"></div>
+
+    <div class="lib-info" id="libInfo">
+      <a class="brand" href="#top" aria-label="Click Club photobooth, back to the top">
+        <svg aria-hidden="true" viewBox="0 0 20 40" width="14" height="28"><rect x="1" y="1" width="18" height="38" rx="2" fill="#2A1720"/><rect x="4" y="4" width="12" height="8" fill="#F7C6D9"/><rect x="4" y="14" width="12" height="8" fill="#B9A3E3"/><rect x="4" y="24" width="12" height="8" fill="#F2B880"/></svg>
+        <span class="brand-word">Click Club</span>
+        <span class="brand-tag">Photobooth</span>
+      </a>
+      <h2 class="lib-name roll" id="libName" aria-live="polite"></h2>
+      <dl class="lib-dl">
+        <div><dt>Inspired by</dt><dd class="roll" id="libArtist"></dd></div>
+      </dl>
+    </div>
+
+    <div class="lib-notes roll" id="libNotes">
+      <p class="lib-cap" id="libCap"></p>
+      <div class="lib-moods" id="libMoods"></div>
+    </div>
+
+    <div class="lib-foot">
+      <div class="lib-nav">
+        <ol class="lib-index" id="libIndex" aria-label="Booths"></ol>
+        <span class="lib-hint" aria-hidden="true">Scroll to browse ↓</span>
+      </div>
+      <div class="lib-ctl">
+        <button class="lib-arrow" id="libPrev" type="button" aria-label="Previous booth">←</button>
+        <button class="lib-arrow" id="libNext" type="button" aria-label="Next booth">→</button>
+        <a class="lib-go" id="libGo" href="photobooth-row.html">Step inside <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="hw" aria-labelledby="hwTitle">
+  <div class="wrap">
+    <div class="hw-head">
+      <div>
+        <p class="eyebrow">How it works · about a minute</p>
+        <h2 id="hwTitle">Four flashes, <em>one strip</em></h2>
+      </div>
+      <p class="hw-lede">No app, no sign-up. Pick a booth, let the camera in, and walk out with a strip of you in your favourite era.</p>
+    </div>
+
+    <ol class="hw-strip" aria-label="Four steps">
+      <li>
+        <div class="hw-frame" style="--d: 0" aria-hidden="true">
+          <span class="hw-no">01</span>
+          <div class="ip-track" id="hwTrack"></div>
+          <div class="ip-sel"></div>
+          <span class="ip-tap">tap to step inside</span>
+        </div>
+        <h3><span>01</span>Pick your era</h3>
+        <p>Scroll the library and tap a booth. Every era has its own colours, stickers and strip.</p>
+      </li>
+      <li>
+        <div class="hw-frame" style="--d: 1" aria-hidden="true">
+          <span class="hw-no">02</span>
+          <div class="ic-vf"><i></i><i></i><i></i><i></i></div>
+          <span class="ic-rec">LIVE</span>
+          <svg class="ic-me" viewBox="0 0 100 90"><circle cx="50" cy="30" r="19" fill="currentColor"/><path d="M12 90c0-24 17-35 38-35s38 11 38 35z" fill="currentColor"/></svg>
+          <span class="ic-ok">✓ Camera on</span>
+        </div>
+        <h3><span>02</span>Let the camera in</h3>
+        <p>Allow camera access and see yourself live. Nothing is uploaded; your photos stay on your device.</p>
+      </li>
+      <li>
+        <div class="hw-frame" style="--d: 2" aria-hidden="true">
+          <span class="hw-no">03</span>
+          <span class="cd-n">3</span><span class="cd-n">2</span><span class="cd-n">1</span>
+          <div class="cd-flash"></div>
+          <span class="cd-click">click!</span>
+        </div>
+        <h3><span>03</span>Strike four poses</h3>
+        <p>Pick your cut: a classic 4-shot strip, a 3-shot trio, a 2×2 grid or a six-pack. Then three, two, one, flash.</p>
+      </li>
+      <li>
+        <div class="hw-frame" style="--d: 3" aria-hidden="true">
+          <span class="hw-no">04</span>
+          <div class="sv-slot"></div>
+          <div class="sv-clip"><div class="sv-strip"><i style="--c: #B9A3E3"></i><i style="--c: #F2B880"></i><i style="--c: #E58FB4"></i><i style="--c: #CCDDBC"></i></div></div>
+          <span class="sv-save">↓ Save strip</span>
+        </div>
+        <h3><span>04</span>Save your strip</h3>
+        <p>Watch it feed out of the printer in the era's frame, then save it as an image or go again as many times as you like.</p>
+      </li>
+      <li class="hw-tail"><b>see you in the booth ♡</b><small>CLICK CLUB · HOW IT WORKS</small></li>
+    </ol>
+
+    <div class="hw-foot">
+      <ul class="hw-promises">
+        <li>Free to use</li>
+        <li>No sign-up</li>
+        <li>Photos stay on your device</li>
+      </ul>
+      <a class="hw-cta" href="#eras">Pick your booth <span aria-hidden="true">↑</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap site-foot">
+  <div class="foot-row">
+    <span class="foot-word">Click Club</span>
+    <div class="foot-links">
+      <span>[MADE BY AVRIL ABELARDE]</span>
+      <span><a href="https://www.instagram.com/vrylle_avi/" target="_blank" rel="noopener">[INSTAGRAM]</a> · <a href="https://www.tiktok.com/@eivr__" target="_blank" rel="noopener">[TIKTOK]</a></span>
+    </div>
+  </div>
+  <p class="fine">Themes are fan-made tributes inspired by each artist's album. Click Club is not affiliated with or endorsed by any artist or label, and no album artwork or lyrics are used.</p>
+</footer>
+
+</div>
+
+<script src="js/eras.js"></script>
+<script src="js/landing.js"></script>
+</body>
+</html>
