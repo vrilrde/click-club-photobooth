@@ -120,7 +120,7 @@
     $('#inName').textContent = b.name;
     buildWall(b);
     BOOTHS.forEach(function (o, j) { $('#chip-' + o.id).setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
-    try { history.replaceState(null, '', '#' + b.id); } catch (e) {}
+    try { localStorage.setItem('cc-era', b.id); } catch (e) {}
     layout();
   }
   function lock(on) {
@@ -159,6 +159,7 @@
   async function leave() {
     if (state !== 'inside') return;
     state = 'exiting';
+    stripUrl(false);
     showInside(false);
     stopCam();
     await wait(350);
@@ -403,6 +404,7 @@
     buildStrip();
     $('#lensBlock').classList.add('away');
     await printStrip();
+    stripUrl(true);
     shot.textContent = cut.name + ' · ' + cut.size;
     $('#shootBtn').textContent = 'New strip';
     $('#saveBtn').hidden = false;
@@ -410,13 +412,30 @@
     shooting = false;
   }
   $('#shootBtn').addEventListener('click', function () {
-    if (zone.classList.contains('delivered') && !shooting) { resetShoot(); return; }
+    if (zone.classList.contains('delivered') && !shooting) { stripUrl(false); resetShoot(); return; }
     shoot();
   });
   setCut(cut);
 
-  var start = 0, h = (location.hash || '').slice(1);
-  BOOTHS.forEach(function (b, i) { if (b.id === h) start = i; });
+  var STRIP = location.protocol === 'file:' ? '' : CLICK_CLUB.booth + '/strip';
+  Array.prototype.forEach.call(document.querySelectorAll('link[rel~="icon"], link[rel="apple-touch-icon"]'), function (l) { l.href = l.href; });
+  function stripUrl(on) {
+    if (!STRIP) return;
+    try {
+      if (on) history.pushState({ strip: true }, '', STRIP);
+      else if (history.state && history.state.strip) history.back();
+    } catch (e) {}
+  }
+  window.addEventListener('popstate', function () {
+    var atStrip = history.state && history.state.strip, out = zone.classList.contains('delivered');
+    if (out && !atStrip && !shooting) resetShoot();
+    if (atStrip && !out) history.replaceState(null, '', CLICK_CLUB.booth);
+  });
+
+  var start = 0, want = (location.hash || '').slice(1);
+  try { want = want || sessionStorage.getItem('cc-arrive') || localStorage.getItem('cc-era'); } catch (e) {}
+  BOOTHS.forEach(function (b, i) { if (b.id === want) start = i; });
+  if (location.hash) try { history.replaceState(null, '', location.pathname); } catch (e) {}
   root.classList.add('preload');
   cur = start; apply(start);
   requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.remove('preload'); }); });
@@ -432,6 +451,7 @@
     root.classList.remove('arrive');
   }
 
+  $('#back').href = CLICK_CLUB.home;
   $('#back').addEventListener('click', function (e) {
     if (reduce) return;
     e.preventDefault();

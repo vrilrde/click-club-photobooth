@@ -9,7 +9,8 @@ Open `index.html` in a browser. No build step or install needed. The camera work
 ## Files
 
 - `index.html`: the booth library (hero) and how-it-works section
-- `photobooth-row.html`: the booth, camera, strip cuts, printing and saving
+- `inside-photobooth.html`: the booth, camera, strip cuts, printing and saving
+- `vercel.json`: clean addresses (`/`, `/inside-photobooth`, `/inside-photobooth/strip`)
 - `css/`: styles for each page
 - `js/eras.js`: the eight era themes both pages read
 - `js/landing.js`, `js/booth.js`: the page scripts
