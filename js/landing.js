@@ -22,7 +22,7 @@
   var BOOTH_TOKENS = ['front', 'side', 'top', 'band', 'band-ink', 'bulb', 'bulb-glow', 'interior', 'rod', 'panel', 'panel-ink', 'sign', 'sign-ink', 'sign-edge', 'curtain', 'display', 'disp-style', 'disp-weight'];
   track.innerHTML = ERAS.map(function (e, i) {
     var tokens = BOOTH_TOKENS.map(function (k) { return '--' + k + ':' + e.vars[k]; }).join(';');
-    return '<a class="car" data-i="' + i + '" href="' + E.booth + '#' + e.id + '" style="' + esc(tokens) + '" aria-label="' + esc(e.name) + ', inspired by ' + esc(e.artist) + '. Step inside.">' +
+    return '<a class="car" data-i="' + i + '" href="' + E.booth + '" style="' + esc(tokens) + '" aria-label="' + esc(e.name) + ', inspired by ' + esc(e.artist) + '. Step inside.">' +
       '<div class="mb" aria-hidden="true">' +
         '<div class="mb-shadow"></div><div class="mb-side l"></div><div class="mb-side r"></div><div class="mb-top"></div>' +
         '<div class="mb-body">' +
@@ -87,7 +87,6 @@
     $('libMoods').innerHTML = e.moods.map(function (m) {
       return '<div><b aria-label="' + m[1] + ' out of 5">' + '★★★★★'.slice(0, m[1]) + '☆☆☆☆☆'.slice(0, 5 - m[1]) + '</b><span>' + esc(m[0]) + '</span></div>';
     }).join('');
-    $('libGo').href = E.booth + '#' + e.id;
     $('libGo').setAttribute('aria-label', 'Step inside ' + e.name);
     $('libPrev').disabled = i === 0; $('libNext').disabled = i === N - 1;
     stage.style.setProperty('--tint', e.bg);
@@ -145,16 +144,29 @@
     stage.style.setProperty('--room-to', e.vars.room);
     stage.classList.add('leaving');
     cars[i].classList.add('open');
+    remember(e.id);
     try { sessionStorage.setItem('cc-arrive', e.id); } catch (err) {}
-    setTimeout(function () { location.href = E.booth + '#' + e.id; }, reduce ? 0 : 1050);
+    setTimeout(function () { location.href = E.booth; }, reduce ? 0 : 1050);
   }
   requestAnimationFrame(frame);
 
+  function remember(id) { try { localStorage.setItem('cc-era', id); } catch (err) {} }
   cars.forEach(function (c, i) {
+    c.addEventListener('pointerdown', function () { remember(ERAS[i].id); });
     c.addEventListener('click', function (e) { e.preventDefault(); enterBooth(i); });
     c.addEventListener('focus', function () { if (!leaving && i !== Math.round(target())) go(i); });
   });
+  $('libGo').href = E.booth;
+  $('libGo').addEventListener('pointerdown', function () { remember(ERAS[Math.round(target())].id); });
   $('libGo').addEventListener('click', function (e) { e.preventDefault(); enterBooth(Math.round(target())); });
+  Array.prototype.forEach.call(document.querySelectorAll('a[href^="#"]'), function (a) {
+    a.addEventListener('click', function (e) {
+      var t = document.getElementById(a.getAttribute('href').slice(1));
+      if (!t) return;
+      e.preventDefault();
+      t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    });
+  });
   window.addEventListener('pageshow', function (e) {
     if (!e.persisted) return;
     leaving = false; pending = -1;

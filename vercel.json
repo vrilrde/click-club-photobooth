@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/inside-photobooth/strip", "destination": "/inside-photobooth", "permanent": false },
+    { "source": "/photobooth-row", "destination": "/inside-photobooth", "permanent": true }
+  ]
+}
