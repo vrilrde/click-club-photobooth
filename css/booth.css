@@ -95,6 +95,22 @@ button { font: inherit; }
   background: rgba(255,255,255,.05); color: var(--ink); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; }
 .back:hover { background: rgba(255,255,255,.12); }
 .back:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.tune { display: inline-flex; align-items: center; gap: 10px; min-width: 0; max-width: 15rem; min-height: 46px; padding: 0 16px 0 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.05); color: var(--ink); text-align: left; }
+.tune:hover { background: rgba(255,255,255,.12); }
+.tune:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.tune-eq { flex: none; display: flex; align-items: flex-end; gap: 2px; width: 14px; height: 14px; }
+.tune-eq i { flex: 1; height: 30%; border-radius: 1px; background: var(--accent); }
+.tune[aria-pressed="true"] .tune-eq i { animation: eq .8s ease-in-out infinite alternate; }
+.tune-eq i:nth-child(2) { animation-delay: -.5s; }
+.tune-eq i:nth-child(3) { animation-delay: -.25s; }
+@keyframes eq { from { height: 25% } to { height: 100% } }
+.tune-txt { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+.tune-txt b, .tune-txt small { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.tune-txt b { font-size: 12px; }
+.tune-txt small { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.tune[aria-pressed="false"] .tune-txt { opacity: .6; }
+.tune[aria-pressed="false"] .tune-txt b { text-decoration: line-through; }
 @media (max-width: 760px) {
   .hud-top { flex-direction: column-reverse; gap: 12px; }
   .back { min-height: 34px; padding: 0 12px; font-size: 11px; }
@@ -220,6 +236,7 @@ button { font: inherit; }
 .depart .stage { opacity: 0; transition: opacity .4s ease; }
 
 @media (prefers-reduced-motion: reduce) {
+  .tune[aria-pressed="true"] .tune-eq i { animation: none; height: 70%; }
   .pt i, .bulbs i, .rec { animation: none; }
   .strip, .lens-block, .inside { transition-duration: .01s; }
 }

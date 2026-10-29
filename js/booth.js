@@ -116,9 +116,10 @@
     $('#eyebrow').textContent = 'Inspired by ' + b.artist;
     $('#name').textContent = b.name;
     $('#tag').textContent = b.caption;
-    document.title = b.name + ' · Click Club';
+    document.title = b.name + ' · Click Club Photobooth';
     $('#inName').textContent = b.name;
     buildWall(b);
+    setSong(b);
     BOOTHS.forEach(function (o, j) { $('#chip-' + o.id).setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
     try { localStorage.setItem('cc-era', b.id); } catch (e) {}
     layout();
@@ -143,6 +144,7 @@
     if (state !== 'outside') return;
     state = 'entering'; lock(true);
     startCam();
+    playSong();
     hud.classList.add('gone'); booth.classList.add('hot');
     var target = zoomZ();
     tween({ idle: 0, bry: 0, rx: 0, ry: 0, peek: 0, camZ: target * .38 }, 1500, 'io');
@@ -162,6 +164,7 @@
     stripUrl(false);
     showInside(false);
     stopCam();
+    stopSong();
     await wait(350);
     tween({ camZ: 0 }, 1700, 'io');
     tween({ env: 1 }, 1400, 'in3');
@@ -431,6 +434,81 @@
     if (out && !atStrip && !shooting) resetShoot();
     if (atStrip && !out) history.replaceState(null, '', CLICK_CLUB.booth);
   });
+
+  var song = $('#song'), tune = $('#tune'), VOL = .55, songSrc = '', songAt = 0, songOff = false, fadeId = 0, mix = null;
+  try { songOff = localStorage.getItem('cc-music') === 'off'; } catch (e) {}
+  // Fades run through a Web Audio gain node because iPhones ignore audio.volume.
+  // Pages opened from file:// can't route audio through Web Audio, so they fade audio.volume instead.
+  function level() {
+    if (mix === null) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      mix = false;
+      if (AC && location.protocol !== 'file:') try {
+        var ctx = new AC(), g = ctx.createGain();
+        g.gain.value = 0;
+        ctx.createMediaElementSource(song).connect(g);
+        g.connect(ctx.destination);
+        song.volume = 1;
+        mix = { ctx: ctx, gain: g.gain };
+      } catch (e) {}
+    }
+    if (mix && mix.ctx.state === 'suspended') mix.ctx.resume();
+    return mix;
+  }
+  function fade(to, ms, done) {
+    var id = ++fadeId, m = level();
+    if (m) {
+      var now = m.ctx.currentTime;
+      m.gain.cancelScheduledValues(now);
+      m.gain.setValueAtTime(m.gain.value, now);
+      m.gain.linearRampToValueAtTime(to, now + ms / 1000);
+      if (done) setTimeout(function () { if (id === fadeId) done(); }, ms);
+      return;
+    }
+    var from = song.volume, t0 = performance.now();
+    (function step(now) {
+      if (id !== fadeId) return;
+      var k = Math.min(1, Math.max(0, now - t0) / ms);
+      song.volume = from + (to - from) * k;
+      if (k < 1) requestAnimationFrame(step); else if (done) done();
+    })(t0);
+  }
+  function playSong() {
+    if (songOff || !songSrc) return;
+    if (song.getAttribute('src') !== songSrc) song.src = songSrc;
+    if (song.paused) fade(0, 1);
+    var p = song.play();
+    if (p) p.then(function () { fade(VOL, 1500); }).catch(function () {});
+  }
+  function stopSong() {
+    fade(0, 1200, function () { song.pause(); if (song.readyState) song.currentTime = songAt; });
+  }
+  // The song only plays inside the booth: it fades in from its start time (just before the singing) on Step inside
+  // and fades out on Step out.
+  function setSong(b) {
+    songAt = b.song && b.song.start || 0;
+    songSrc = b.song ? CLICK_CLUB.music + b.song.file + (songAt ? '#t=' + songAt : '') : '';
+    tune.hidden = !songSrc;
+    if (b.song) { $('#tuneTitle').textContent = b.song.title; $('#tuneArtist').textContent = b.artist; }
+  }
+  function syncTune() {
+    var on = !songOff && !song.paused;
+    tune.setAttribute('aria-pressed', on ? 'true' : 'false');
+    tune.title = on ? 'Pause the music' : 'Play the music';
+  }
+  song.addEventListener('play', syncTune);
+  song.addEventListener('pause', syncTune);
+  tune.addEventListener('click', function () {
+    if (!songOff && !song.paused) { songOff = true; fade(0, 300, function () { song.pause(); }); }
+    else { songOff = false; playSong(); }
+    try { localStorage.setItem('cc-music', songOff ? 'off' : 'on'); } catch (e) {}
+    syncTune();
+  });
+  // If the browser blocked the song on the way in, start it on the next tap or key inside the booth.
+  function unblock(e) { if (state === 'inside' && song.paused && !tune.contains(e.target)) playSong(); }
+  document.addEventListener('pointerdown', unblock);
+  document.addEventListener('keydown', unblock);
+  syncTune();
 
   var start = 0, want = (location.hash || '').slice(1);
   try { want = want || sessionStorage.getItem('cc-arrive') || localStorage.getItem('cc-era'); } catch (e) {}
