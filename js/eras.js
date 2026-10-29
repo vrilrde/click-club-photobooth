@@ -27,6 +27,7 @@
 
   var ERAS = [
     { id: 'glitter-grudges', name: 'Glitter & Grudges', artist: 'Olivia Rodrigo', caption: '4 shots, zero regrets',
+      song: { title: 'deja vu', file: 'olivia-rodrigo-deja-vu.mp3', start: 10 },
       moods: [['Glitter count', 5], ['Angst meter', 5]],
       bg: '#EFE6FA', ink: '#3B1F5C',
       doodles: ['star', 'crack', 'bow', 'sparkle'],
@@ -38,6 +39,7 @@
         ink: '#efe6fa', muted: '#b9a3e3', accent: '#d9c2ff', 'accent-ink': '#22103a', paper: '#faf6ff', flashc: '#ffffff',
         display: "'Permanent Marker', 'Marker Felt', cursive", 'disp-style': 'normal', 'disp-weight': '400', 'disp-case': 'none', 'disp-track': '0.02em' } },
     { id: 'sunset-scrapbook', name: 'Sunset Scrapbook', artist: 'NIKI', caption: 'golden hour, forever',
+      song: { title: 'The Apartment We Won’t Share', file: 'niki-the-apartment-we-wont-share.mp3', start: 13 },
       moods: [['Nostalgia', 5], ['Golden hour', 4]],
       bg: '#FCEDE0', ink: '#7A3420',
       doodles: ['sun', 'bloom', 'plane', 'film'],
@@ -49,6 +51,7 @@
         ink: '#fcede0', muted: '#e3b896', accent: '#f2b880', 'accent-ink': '#3a1a0e', paper: '#fffaf3', flashc: '#fff3e2',
         display: "'Fraunces', Georgia, serif", 'disp-style': 'italic', 'disp-weight': '600', 'disp-case': 'none', 'disp-track': '0' } },
     { id: 'bracelet-exchange', name: 'Bracelet Exchange', artist: 'Taylor Swift', caption: 'trade you a bracelet?',
+      song: { title: 'You’re On Your Own, Kid', file: 'taylor-swift-youre-on-your-own-kid.mp3', start: 1 },
       moods: [['Sparkle', 5], ['Singalong risk', 5]],
       bg: '#FDEAF2', ink: '#5A2346',
       doodles: ['beads', 'sparkle', 'cloud', 'heart'],
@@ -60,6 +63,7 @@
         ink: '#fdeaf2', muted: '#e7b3cb', accent: '#f7c6d9', 'accent-ink': '#3d1530', paper: '#ffffff', flashc: '#ffffff',
         display: "'Fredoka', 'Arial Rounded MT Bold', sans-serif", 'disp-style': 'normal', 'disp-weight': '700', 'disp-case': 'none', 'disp-track': '0.01em' } },
     { id: 'cherry-kiss-diner', name: 'Cherry Kiss Diner', artist: 'Sabrina Carpenter', caption: 'sweet like cherry soda',
+      song: { title: 'Please Please Please', file: 'sabrina-carpenter-please-please-please.mp3', start: 17 },
       moods: [['Flirt factor', 5], ['Cuteness', 5]],
       bg: '#FFE8EE', ink: '#8E0F24',
       doodles: ['cherry', 'bow', 'heart', 'soda'],
@@ -71,6 +75,7 @@
         ink: '#ffe8ee', muted: '#f2a7b6', accent: '#ffd1dc', 'accent-ink': '#5a0a17', paper: '#fff8f9', flashc: '#ffffff',
         display: "'Lobster', 'Brush Script MT', cursive", 'disp-style': 'normal', 'disp-weight': '400', 'disp-case': 'none', 'disp-track': '0.01em' } },
     { id: 'lace-lullaby', name: 'Jazz & Lullaby', artist: 'Laufey', caption: 'a little old-fashioned',
+      song: { title: 'From The Start', file: 'laufey-from-the-start.mp3', start: 4 },
       moods: [['Romance', 5], ['Coziness', 4]],
       bg: '#EAF1F9', ink: '#1F3A5F',
       doodles: ['bow', 'note', 'cup', 'moon'],
@@ -82,6 +87,7 @@
         ink: '#eaf1f9', muted: '#a9bfd9', accent: '#f4c9d4', 'accent-ink': '#1f3a5f', paper: '#fbf8f1', flashc: '#fffaf0',
         display: "'Cormorant Garamond', Georgia, serif", 'disp-style': 'italic', 'disp-weight': '600', 'disp-case': 'none', 'disp-track': '0' } },
     { id: 'rodeo-glitter', name: 'Rodeo Glitter', artist: 'Chappell Roan', caption: 'saddle up, sparkle on',
+      song: { title: 'Pink Pony Club', file: 'chappell-roan-pink-pony-club.mp3', start: 8.5 },
       moods: [['Camp', 5], ['Glitter count', 5]],
       bg: '#FFE6F1', ink: '#8A1650',
       doodles: ['hat', 'star', 'heart', 'sparkle'],
@@ -93,6 +99,7 @@
         ink: '#ffe6f1', muted: '#ff9cc6', accent: '#ffe98a', 'accent-ink': '#4a0b28', paper: '#fff9fc', flashc: '#fff8e0',
         display: "'Rye', Georgia, serif", 'disp-style': 'normal', 'disp-weight': '400', 'disp-case': 'none', 'disp-track': '0.02em' } },
     { id: 'polaroid-letters', name: 'Polaroid Letters', artist: 'Gracie Abrams', caption: 'keep this one',
+      song: { title: 'That’s So True', file: 'gracie-abrams-thats-so-true.mp3', start: 0.5 },
       moods: [['Softness', 5], ['Diary energy', 5]],
       bg: '#F5EFE5', ink: '#4A3F35',
       doodles: ['letter', 'polaroid', 'heart', 'stars'],
@@ -104,6 +111,7 @@
         ink: '#f5efe5', muted: '#c7b8a3', accent: '#e9dcc8', 'accent-ink': '#2e2621', paper: '#ffffff', flashc: '#fffaf2',
         display: "'Special Elite', 'Courier New', monospace", 'disp-style': 'normal', 'disp-weight': '400', 'disp-case': 'none', 'disp-track': '0' } },
     { id: 'daydream-bloom', name: 'Daydream Bloom', artist: 'beabadoobee', caption: 'head in the clouds',
+      song: { title: 'Beaches', file: 'beabadoobee-beaches.mp3', start: 9.5 },
       moods: [['Daydream', 5], ['Grunge', 3]],
       bg: '#EDF3E6', ink: '#3F5A35',
       doodles: ['daisy', 'pick', 'butterfly', 'cloud'],
@@ -117,5 +125,5 @@
   ];
 
   var local = location.protocol === 'file:';
-  window.CLICK_CLUB = { eras: ERAS, doodles: DOODLES, booth: local ? 'inside-photobooth.html' : '/inside-photobooth', home: local ? 'index.html' : '/' };
+  window.CLICK_CLUB = { eras: ERAS, doodles: DOODLES, booth: local ? 'inside-photobooth.html' : '/inside-photobooth', home: local ? 'index.html' : '/', music: local ? 'assets/music/' : '/assets/music/' };
 })();

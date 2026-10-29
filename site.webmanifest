@@ -1,0 +1,13 @@
+{
+  "name": "Click Club Photobooth",
+  "short_name": "Click Club",
+  "description": "A free online photobooth with album-era booths.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#150b22",
+  "theme_color": "#150b22",
+  "icons": [
+    { "src": "/assets/icon/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icon/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

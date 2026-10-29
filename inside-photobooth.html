@@ -3,10 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Click Club</title>
+<title>Step inside the booth · Click Club Photobooth</title>
+<meta name="description" content="Step inside a Click Club Photobooth booth: pick your cut, take photos with your camera and watch your photo strip print. Free, no sign-up, photos stay on your device.">
+<link rel="canonical" href="https://click-club-photobooth.vercel.app/inside-photobooth">
+<meta name="theme-color" content="#150b22">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Click Club Photobooth">
+<meta property="og:title" content="Step inside the booth · Click Club Photobooth">
+<meta property="og:description" content="Pick your cut, take photos with your camera and watch your photo strip print.">
+<meta property="og:url" content="https://click-club-photobooth.vercel.app/inside-photobooth">
+<meta property="og:image" content="https://click-club-photobooth.vercel.app/assets/og/click-club-photobooth.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icon/icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/icon/icon-512.png">
 <link rel="apple-touch-icon" href="assets/icon/icon-192.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Caveat:wght@500;700&family=Permanent+Marker&family=Fraunces:ital,opsz,wght@1,9..144,600&family=Fredoka:wght@700&family=Lobster&family=Cormorant+Garamond:ital,wght@1,600&family=Rye&family=Special+Elite&family=Gaegu:wght@700&display=swap">
 <link rel="stylesheet" href="css/booth.css">
 <script>try { if (sessionStorage.getItem('cc-arrive')) document.documentElement.classList.add('arrive'); } catch (e) {}</script>
@@ -96,9 +111,14 @@
       <button class="btn primary" id="shootBtn" type="button">Take photos</button>
       <button class="btn ghost" id="saveBtn" type="button" hidden>Save strip</button>
       <button class="btn ghost" id="outBtn" type="button">Step out</button>
+      <button class="tune" id="tune" type="button" aria-pressed="false" hidden>
+        <span class="tune-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="tune-txt"><span class="sr">Music: </span><b id="tuneTitle"></b><small id="tuneArtist"></small></span>
+      </button>
     </div>
     <div class="flash" id="flash"></div>
   </section>
+  <audio id="song" loop preload="none"></audio>
 </main>
 
 <script src="js/eras.js"></script>

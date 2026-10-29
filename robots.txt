@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/music/
+
+Sitemap: https://click-club-photobooth.vercel.app/sitemap.xml
