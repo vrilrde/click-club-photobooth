@@ -120,6 +120,7 @@
     $('#inName').textContent = b.name;
     buildWall(b);
     setSong(b);
+    setDesigns(b);
     BOOTHS.forEach(function (o, j) { $('#chip-' + o.id).setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
     try { localStorage.setItem('cc-era', b.id); } catch (e) {}
     layout();
@@ -242,55 +243,83 @@
     { id: 'grid', name: 'Grid', size: '4×6″ print', shots: 4, W: 1200, H: 1800, cols: 2, rows: 2, pad: 44, gap: 24, cap: 190 },
     { id: 'six', name: 'Six-pack', size: '4×6″ print', shots: 6, W: 1200, H: 1800, cols: 2, rows: 3, pad: 44, gap: 24, cap: 190 }
   ];
-  var cut = CUTS[0];
-  try { CUTS.forEach(function (c) { if (c.id === localStorage.getItem('cc-cut')) cut = c; }); } catch (e) {}
+  var cut = CUTS[0], cutPref = null, designCuts = [];
+  try { cutPref = localStorage.getItem('cc-cut'); } catch (e) {}
+  CUTS.forEach(function (c) { if (c.id === cutPref) cut = c; });
+  // An artist frame works like a cut: four shots under a ready-made overlay, at twice its 640×1840 design size.
+  function designCut(b, d) {
+    return { id: d.id, name: d.name, size: b.artist + ' frame', shots: d.slots.length, W: 1280, H: 3680, cols: 1, rows: d.slots.length, design: d };
+  }
   function cutGeo(c) {
     c = c || cut;
+    if (c.design) {
+      var k = c.W / 640, s0 = c.design.slots[0];
+      return { fw: s0[2] * k, fh: s0[3] * k, mat: 0, pa: s0[2] / s0[3], cells: c.design.slots.map(function (r) { return { x: r[0] * k, y: r[1] * k }; }) };
+    }
     var fw = (c.W - c.pad * 2 - c.gap * (c.cols - 1)) / c.cols, fh = (c.H - c.pad - c.cap - c.gap * (c.rows - 1)) / c.rows, mat = c.W / 75;
     var cells = [];
     for (var i = 0; i < c.shots; i++) cells.push({ x: c.pad + (i % c.cols) * (fw + c.gap), y: c.pad + Math.floor(i / c.cols) * (fh + c.gap) });
     return { fw: fw, fh: fh, mat: mat, pa: (fw - mat * 2) / (fh - mat * 2), cells: cells };
   }
-  function capSizes(c) { return c.cols === 1 ? { hand: .077, mono: .03 } : { hand: .058, mono: .022 }; }
+  function capSizes(c) { return c.cols === 1 ? { title: .06, stamp: .028 } : { title: .046, stamp: .021 }; }
 
-  var cutsEl = $('#cuts'), thumbsEl = $('#thumbs');
+  function artSrc(d) { return CLICK_CLUB.designs + d.file; }
+  var cutsEl = $('#cuts'), designsEl = $('#designs'), thumbsEl = $('#thumbs');
   cutsEl.innerHTML = CUTS.map(function (c) {
     return '<button class="cut" type="button" data-id="' + c.id + '" aria-pressed="false">' +
       '<span class="cut-ico" aria-hidden="true" style="--a:' + (c.W / c.H).toFixed(4) + ';--c:' + c.cols + ';--r:' + c.rows + '">' + new Array(c.shots + 1).join('<i></i>') + '</span>' +
       '<span><b>' + c.name + '</b><small>' + c.shots + ' cuts · ' + c.size + '</small></span></button>';
   }).join('');
+  function setDesigns(b) {
+    designCuts = (b.designs || []).map(function (d) { return designCut(b, d); });
+    designsEl.innerHTML = designCuts.length ? '<p class="designs-label">Artist frames</p>' + designCuts.map(function (c) {
+      return '<button class="cut" type="button" data-id="' + c.id + '" aria-pressed="false">' +
+        '<img class="cut-art" src="' + artSrc(c.design) + '" alt="" width="12" height="32">' +
+        '<span><b>' + esc(c.name) + '</b><small>' + c.shots + ' cuts · ' + esc(b.artist) + '</small></span></button>';
+    }).join('') : '<p class="designs-soon">Artist frames for ' + esc(b.artist) + ' are coming soon</p>';
+    var next = cut.design ? CUTS[0] : cut;
+    designCuts.forEach(function (c) { if (c.id === cutPref) next = c; });
+    setCut(next);
+  }
   function setCut(c) {
-    cut = c;
+    cut = c; cutPref = c.id;
     try { localStorage.setItem('cc-cut', c.id); } catch (e) {}
-    Array.prototype.forEach.call(cutsEl.children, function (btn) { btn.setAttribute('aria-pressed', btn.getAttribute('data-id') === c.id ? 'true' : 'false'); });
+    Array.prototype.forEach.call(inside.querySelectorAll('.cut'), function (btn) { btn.setAttribute('aria-pressed', btn.getAttribute('data-id') === c.id ? 'true' : 'false'); });
     inside.style.setProperty('--fa', cutGeo().pa.toFixed(4));
     thumbsEl.innerHTML = new Array(c.shots + 1).join('<li></li>');
   }
-  function lockCuts(on) { Array.prototype.forEach.call(cutsEl.children, function (btn) { btn.disabled = on; }); }
-  cutsEl.addEventListener('click', function (e) {
+  function lockCuts(on) { Array.prototype.forEach.call(inside.querySelectorAll('.cut'), function (btn) { btn.disabled = on; }); }
+  function pickCut(e) {
     var btn = e.target.closest('.cut');
     if (!btn || shooting) return;
-    CUTS.forEach(function (c) { if (c.id === btn.getAttribute('data-id')) setCut(c); });
-  });
+    CUTS.concat(designCuts).forEach(function (c) { if (c.id === btn.getAttribute('data-id')) setCut(c); });
+  }
+  cutsEl.addEventListener('click', pickCut);
+  designsEl.addEventListener('click', pickCut);
 
   var shooting = false, photos = [], look = [];
   var strip = $('#strip'), zone = $('#printZone'), count = $('#count'), flash = $('#flash'), shot = $('#shot');
   function stamp() { var d = new Date(); function z(n) { return (n < 10 ? '0' : '') + n; } return z(d.getMonth() + 1) + '.' + z(d.getDate()) + '.' + String(d.getFullYear()).slice(2); }
   function pc(v, of) { return (v / of * 100).toFixed(3) + '%'; }
   function buildStrip() {
-    var b = BOOTHS[cur], g = cutGeo(), W = cut.W, H = cut.H, cs = capSizes(cut), html = '';
+    var b = BOOTHS[cur], g = cutGeo(), W = cut.W, H = cut.H, cs = capSizes(cut), d = cut.design, html = '';
     look = [];
     g.cells.forEach(function (p, i) {
       var f = b.frames[i % b.frames.length];
       var rot = +(Math.random() * 16 - 8).toFixed(1), sc = (0.9 + Math.random() * 0.25).toFixed(2), dk = b.doodles[(i + Math.floor(Math.random() * 4)) % 4];
       look.push({ doodle: dk, rot: rot });
-      var svg = '<svg viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(' + rot + 'deg) scale(' + sc + ')">' + D[dk] + '</svg>';
+      var svg = d && photos[i] ? '' : '<svg viewBox="0 0 24 24" aria-hidden="true" style="transform:rotate(' + rot + 'deg) scale(' + sc + ')">' + D[dk] + '</svg>';
       var img = photos[i] ? '<img alt="" src="' + photos[i] + '" style="left:' + pc(g.mat, g.fw) + ';top:' + pc(g.mat, g.fh) + ';width:' + pc(g.fw - g.mat * 2, g.fw) + ';height:' + pc(g.fh - g.mat * 2, g.fh) + '">' : '';
       html += '<div class="frame' + (photos[i] ? ' photo' : '') + '" style="left:' + pc(p.x, W) + ';top:' + pc(p.y, H) + ';width:' + pc(g.fw, W) + ';height:' + pc(g.fh, H) +
         ';background:' + f[0] + ';color:' + f[1] + '">' + img + svg + '</div>';
     });
-    html += '<p class="cap" style="top:' + pc(H - cut.cap, H) + ';color:' + b.ink + '"><b style="font-size:' + (cs.hand * 100).toFixed(2) + 'em">' + esc(b.caption) + '</b>' +
-      '<small style="font-size:' + (cs.mono * 100).toFixed(2) + 'em">CLICK CLUB · ' + stamp() + '</small></p>';
+    if (d) {
+      html += '<img class="art" alt="" src="' + artSrc(d) + '">';
+      if (d.stamp) html += '<p class="art-stamp" style="right:' + pc(640 - d.stamp.x, 640) + ';bottom:' + pc(1840 - d.stamp.y, 1840) + ';color:' + d.stamp.color + '">CLICK CLUB · ' + stamp() + '</p>';
+    } else {
+      html += '<p class="cap" style="top:' + pc(H - cut.cap, H) + ';color:' + b.ink + '"><b style="font-size:' + (cs.title * 100).toFixed(2) + 'em">' + esc(b.caption) + '</b>' +
+        '<small style="font-size:' + (cs.stamp * 100).toFixed(2) + 'em">CLICK CLUB · ' + stamp() + '</small></p>';
+    }
     strip.innerHTML = html;
     strip.setAttribute('aria-label', 'Your ' + cut.name + ' ' + cut.size + ' from ' + b.name);
   }
@@ -342,7 +371,7 @@
     return loadImg('data:image/svg+xml;charset=utf-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="192" height="192" color="' + color + '">' + D[key] + '</svg>'));
   }
   async function saveStrip() {
-    var b = BOOTHS[cur], c = cut, g = cutGeo(), W = c.W, H = c.H, cs = capSizes(c);
+    var b = BOOTHS[cur], c = cut, g = cutGeo(), W = c.W, H = c.H, cs = capSizes(c), d = c.design;
     var cv = document.createElement('canvas'); cv.width = W; cv.height = H;
     var x = cv.getContext('2d');
     x.fillStyle = b.vars.paper; x.fillRect(0, 0, W, H);
@@ -352,15 +381,27 @@
       var cx = photos[i] ? p.x + g.fw - size * .75 : p.x + g.fw / 2, cy = photos[i] ? p.y + size * .7 : p.y + g.fh / 2;
       x.fillStyle = f[0]; x.fillRect(p.x, p.y, g.fw, g.fh);
       if (photos[i]) x.drawImage(await loadImg(photos[i]), p.x + g.mat, p.y + g.mat, g.fw - g.mat * 2, g.fh - g.mat * 2);
+      if (d && photos[i]) continue;
       x.save(); x.translate(cx, cy); x.rotate(look[i].rot * Math.PI / 180); x.drawImage(st, -size / 2, -size / 2, size, size); x.restore();
     }
-    var top = H - c.cap;
-    x.fillStyle = b.ink; x.textAlign = 'center';
-    x.font = '700 ' + Math.round(W * cs.hand) + 'px Caveat, cursive';
-    x.fillText(b.caption, W / 2, top + c.cap * .48);
-    x.font = '700 ' + Math.round(W * cs.mono) + 'px "Space Mono", monospace';
-    if ('letterSpacing' in x) x.letterSpacing = Math.round(W * cs.mono * .1) + 'px';
-    x.fillText('CLICK CLUB · ' + stamp(), W / 2, top + c.cap * .76);
+    if (d) {
+      var k = W / 640;
+      x.drawImage(await loadImg(artSrc(d)), 0, 0, W, H);
+      if (d.stamp) {
+        x.fillStyle = d.stamp.color; x.textAlign = 'right'; x.textBaseline = 'bottom';
+        x.font = '500 ' + 12 * k + 'px Poppins, sans-serif';
+        if ('letterSpacing' in x) x.letterSpacing = 2 * k + 'px';
+        x.fillText('CLICK CLUB · ' + stamp(), d.stamp.x * k, d.stamp.y * k);
+      }
+    } else {
+      var top = H - c.cap;
+      x.fillStyle = b.ink; x.textAlign = 'center';
+      x.font = '600 ' + Math.round(W * cs.title) + 'px Poppins, sans-serif';
+      x.fillText(b.caption, W / 2, top + c.cap * .48);
+      x.font = '500 ' + Math.round(W * cs.stamp) + 'px Poppins, sans-serif';
+      if ('letterSpacing' in x) x.letterSpacing = Math.round(W * cs.stamp * .1) + 'px';
+      x.fillText('CLICK CLUB · ' + stamp(), W / 2, top + c.cap * .76);
+    }
     cv.toBlob(function (blob) {
       var a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
@@ -418,7 +459,6 @@
     if (zone.classList.contains('delivered') && !shooting) { stripUrl(false); resetShoot(); return; }
     shoot();
   });
-  setCut(cut);
 
   var STRIP = location.protocol === 'file:' ? '' : CLICK_CLUB.booth + '/strip';
   Array.prototype.forEach.call(document.querySelectorAll('link[rel~="icon"], link[rel="apple-touch-icon"]'), function (l) { l.href = l.href; });

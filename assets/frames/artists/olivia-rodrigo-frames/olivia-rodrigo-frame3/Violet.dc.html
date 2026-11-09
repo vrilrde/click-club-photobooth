@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Violet era photobooth strip</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&amp;family=Archivo+Black&amp;family=Caveat:wght@600&amp;family=DM+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#3B2A7A}a:hover{color:#24184F}
+</style>
+</helmet>
+
+<div style="position: relative; width: 640px; height: 1840px; overflow: hidden; font-family: 'DM Mono', ui-monospace, monospace; background-color: {{bg}}; background-image: radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1.6px), radial-gradient(rgba(30,18,70,0.12) 1px, transparent 1.6px), radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,0.18), rgba(255,255,255,0) 60%); background-size: 7px 7px, 11px 11px, 100% 100%; background-position: 0 0, 3px 5px, 0 0">
+
+  <svg aria-hidden="true" width="0" height="0" style="position: absolute">
+    <defs>
+      <pattern id="vlGlit" width="4" height="4" patternUnits="userSpaceOnUse">
+        <rect width="4" height="4" fill="#8A2FC7"></rect>
+        <circle cx="1" cy="1" r="0.8" fill="#E1B8FF"></circle>
+        <circle cx="3" cy="2.6" r="0.6" fill="#4D0F7E"></circle>
+        <circle cx="2" cy="3.6" r="0.4" fill="#ffffff"></circle>
+      </pattern>
+      <pattern id="vlLeopard" width="14" height="14" patternUnits="userSpaceOnUse">
+        <rect width="14" height="14" fill="#B6A3E6"></rect>
+        <path d="M2 3c1.5-1.5 4-1 4 1s-2 3-3.5 2" fill="none" stroke="#5B4A93" stroke-width="1.2" stroke-linecap="round"></path>
+        <ellipse cx="4" cy="4.5" rx="1.2" ry="0.9" fill="#8E7CC9"></ellipse>
+        <path d="M9 9c1.5-1.5 4-1 4 1s-2 3-3.5 2" fill="none" stroke="#5B4A93" stroke-width="1.2" stroke-linecap="round"></path>
+        <ellipse cx="11" cy="10.5" rx="1.2" ry="0.9" fill="#8E7CC9"></ellipse>
+        <circle cx="11" cy="3" r="0.9" fill="#5B4A93"></circle>
+        <circle cx="3" cy="11" r="0.9" fill="#5B4A93"></circle>
+      </pattern>
+    </defs>
+  </svg>
+
+  <!-- paper strip -->
+  <div style="position: absolute; left: 34px; top: 196px; width: 572px; height: 1520px; box-sizing: border-box; padding: 170px 46px 0; background: #F2F2F6; box-shadow: 0 2px 0 rgba(30,18,70,0.06), 0 24px 48px rgba(30,18,70,0.30), 0 6px 14px rgba(30,18,70,0.18); display: flex; flex-direction: column; gap: 18px">
+
+    <div style="position: relative; width: 100%; height: 300px; flex-shrink: 0; border-radius: 4px; overflow: hidden; background: linear-gradient(160deg, #ECE8FF 0%, #D8CEFA 55%, #E9D5F5 100%); box-shadow: inset 0 0 0 1px rgba(30,18,70,0.10); display: flex; align-items: center; justify-content: center">
+      <svg aria-hidden="true" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5E4BB0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.3l1.4-2h7.6l1.4 2h2.3A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"></path><circle cx="12" cy="13" r="3.6"></circle></svg>
+      <div style="position: absolute; left: 12px; top: 10px; font-size: 12px; letter-spacing: 1.5px; color: #3B2A7A">01</div>
+    </div>
+
+    <div style="position: relative; width: 100%; height: 300px; flex-shrink: 0; border-radius: 4px; overflow: hidden; background: linear-gradient(160deg, #ECE8FF 0%, #D8CEFA 55%, #E9D5F5 100%); box-shadow: inset 0 0 0 1px rgba(30,18,70,0.10); display: flex; align-items: center; justify-content: center">
+      <svg aria-hidden="true" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5E4BB0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.3l1.4-2h7.6l1.4 2h2.3A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"></path><circle cx="12" cy="13" r="3.6"></circle></svg>
+      <div style="position: absolute; left: 12px; top: 10px; font-size: 12px; letter-spacing: 1.5px; color: #3B2A7A">02</div>
+    </div>
+
+    <div style="position: relative; width: 100%; height: 300px; flex-shrink: 0; border-radius: 4px; overflow: hidden; background: linear-gradient(160deg, #ECE8FF 0%, #D8CEFA 55%, #E9D5F5 100%); box-shadow: inset 0 0 0 1px rgba(30,18,70,0.10); display: flex; align-items: center; justify-content: center">
+      <svg aria-hidden="true" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5E4BB0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.3l1.4-2h7.6l1.4 2h2.3A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"></path><circle cx="12" cy="13" r="3.6"></circle></svg>
+      <div style="position: absolute; left: 12px; top: 10px; font-size: 12px; letter-spacing: 1.5px; color: #3B2A7A">03</div>
+    </div>
+
+    <div style="position: relative; width: 100%; height: 300px; flex-shrink: 0; border-radius: 4px; overflow: hidden; background: linear-gradient(160deg, #ECE8FF 0%, #D8CEFA 55%, #E9D5F5 100%); box-shadow: inset 0 0 0 1px rgba(30,18,70,0.10); display: flex; align-items: center; justify-content: center">
+      <svg aria-hidden="true" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#5E4BB0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2.3l1.4-2h7.6l1.4 2h2.3A1.5 1.5 0 0 1 21 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5z"></path><circle cx="12" cy="13" r="3.6"></circle></svg>
+      <div style="position: absolute; left: 12px; top: 10px; font-size: 12px; letter-spacing: 1.5px; color: #3B2A7A">04</div>
+    </div>
+  </div>
+
+  <!-- big butterfly sticker, top left -->
+  <svg aria-hidden="true" viewBox="0 0 100 82" style="position: absolute; left: 24px; top: 36px; width: 140px; height: 115px; transform: rotate(-10deg); filter: drop-shadow(0 6px 8px rgba(30,18,70,0.30))">
+    <g stroke="#ffffff" stroke-width="8" stroke-linejoin="round" fill="#ffffff">
+      <path d="M50 40C30 0 0 5 8 30c6 16 28 16 42 10z"></path>
+      <path d="M50 40C70 0 100 5 92 30c-6 16-28 16-42 10z"></path>
+      <path d="M50 42C34 50 18 70 32 76c10 4 16-12 18-32z"></path>
+      <path d="M50 42c16 8 32 28 18 34-10 4-16-12-18-32z"></path>
+    </g>
+    <g fill="#6F5FC9" stroke="#2D2550" stroke-width="1.5" stroke-linejoin="round">
+      <path d="M50 40C30 0 0 5 8 30c6 16 28 16 42 10z"></path>
+      <path d="M50 40C70 0 100 5 92 30c-6 16-28 16-42 10z"></path>
+      <path d="M50 42C34 50 18 70 32 76c10 4 16-12 18-32z"></path>
+      <path d="M50 42c16 8 32 28 18 34-10 4-16-12-18-32z"></path>
+    </g>
+    <circle cx="26" cy="24" r="6" fill="#ffffff"></circle>
+    <circle cx="74" cy="24" r="6" fill="#ffffff"></circle>
+    <rect x="47" y="30" width="6" height="30" rx="3" fill="#2D2550"></rect>
+  </svg>
+
+  <!-- click club oval -->
+  <div style="position: absolute; left: 186px; top: 112px; width: 268px; height: 120px; box-sizing: border-box; border-radius: 50%; background: #6A579E; border: 7px solid #ffffff; box-shadow: 0 8px 18px rgba(30,18,70,0.30); display: flex; align-items: center; justify-content: center">
+    <div style="font-family: 'Bagel Fat One', system-ui, sans-serif; font-size: 44px; line-height: 0.85; color: #C9BCF2; text-align: center; letter-spacing: 1px">SOUR</div>
+  </div>
+
+  <!-- glitter lips -->
+  <svg aria-hidden="true" viewBox="0 0 120 72" style="position: absolute; left: 470px; top: 22px; width: 160px; height: 96px; transform: rotate(12deg); filter: drop-shadow(0 6px 8px rgba(30,18,70,0.30))">
+    <path d="M4 34C20 14 38 4 52 14c4 3 12 3 16 0 14-10 32 0 48 20C100 60 80 68 60 68S20 60 4 34z" fill="#ffffff" stroke="#ffffff" stroke-width="8" stroke-linejoin="round"></path>
+    <path d="M4 34C20 14 38 4 52 14c4 3 12 3 16 0 14-10 32 0 48 20-24 3-86 3-112 0z" fill="url(#vlGlit)"></path>
+    <path d="M4 37c26 4 86 4 112 0C100 60 80 68 60 68S20 60 4 37z" fill="url(#vlGlit)"></path>
+    <path d="M30 22c8-4 14-2 18 2" stroke="#E1B8FF" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8"></path>
+  </svg>
+
+  <!-- small butterflies -->
+  <svg aria-hidden="true" viewBox="0 0 100 82" style="position: absolute; left: 10px; top: 262px; width: 86px; height: 70px; transform: rotate(-18deg); filter: drop-shadow(0 3px 4px rgba(30,18,70,0.25))">
+    <g fill="#9D94E8" stroke="#2D2550" stroke-width="2" stroke-linejoin="round">
+      <path d="M50 40C30 0 0 5 8 30c6 16 28 16 42 10z"></path>
+      <path d="M50 40C70 0 100 5 92 30c-6 16-28 16-42 10z"></path>
+      <path d="M50 42C34 50 18 70 32 76c10 4 16-12 18-32z"></path>
+      <path d="M50 42c16 8 32 28 18 34-10 4-16-12-18-32z"></path>
+    </g>
+    <path d="M50 40C38 24 22 16 12 22 M50 40C62 24 78 16 88 22 M50 44C40 56 32 66 34 72 M50 44c10 12 18 22 16 28" stroke="#2D2550" stroke-width="1.2" fill="none"></path>
+    <rect x="47.5" y="30" width="5" height="30" rx="2.5" fill="#2D2550"></rect>
+  </svg>
+  <svg aria-hidden="true" viewBox="0 0 100 82" style="position: absolute; left: 546px; top: 206px; width: 86px; height: 70px; transform: rotate(22deg); filter: drop-shadow(0 3px 4px rgba(30,18,70,0.25))">
+    <g fill="#9D94E8" stroke="#2D2550" stroke-width="2" stroke-linejoin="round">
+      <path d="M50 40C30 0 0 5 8 30c6 16 28 16 42 10z"></path>
+      <path d="M50 40C70 0 100 5 92 30c-6 16-28 16-42 10z"></path>
+      <path d="M50 42C34 50 18 70 32 76c10 4 16-12 18-32z"></path>
+      <path d="M50 42c16 8 32 28 18 34-10 4-16-12-18-32z"></path>
+    </g>
+    <path d="M50 40C38 24 22 16 12 22 M50 40C62 24 78 16 88 22 M50 44C40 56 32 66 34 72 M50 44c10 12 18 22 16 28" stroke="#2D2550" stroke-width="1.2" fill="none"></path>
+    <rect x="47.5" y="30" width="5" height="30" rx="2.5" fill="#2D2550"></rect>
+  </svg>
+
+  <!-- leopard star -->
+  <svg aria-hidden="true" viewBox="0 0 24 24" style="position: absolute; left: -6px; top: 590px; width: 170px; height: 170px; transform: rotate(-14deg); filter: drop-shadow(0 6px 8px rgba(30,18,70,0.30))">
+    <path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z" fill="url(#vlLeopard)" stroke="#ffffff" stroke-width="0.8" stroke-linejoin="round"></path>
+  </svg>
+
+  <!-- disco ball -->
+  <div style="position: absolute; left: 540px; top: 934px; width: 124px; height: 124px; border-radius: 50%; border: 5px solid #ffffff; box-sizing: border-box; overflow: hidden; box-shadow: 0 8px 18px rgba(30,18,70,0.35); background-image: radial-gradient(circle at 32% 28%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 22%), repeating-linear-gradient(0deg, rgba(20,20,28,0) 0 9px, rgba(20,20,28,0.55) 9px 11px), repeating-linear-gradient(90deg, rgba(20,20,28,0) 0 9px, rgba(20,20,28,0.55) 9px 11px), conic-gradient(from 0deg, #E8E8EE, #8D8D98, #F4F4F8, #6E6E7A, #D6D6DE, #8D8D98, #E8E8EE), radial-gradient(circle at 40% 35%, #f0f0f5, #50505c)"></div>
+
+  <!-- cd -->
+  <div style="position: absolute; left: -14px; top: 1244px; width: 144px; height: 144px; border-radius: 50%; border: 5px solid #ffffff; box-sizing: border-box; box-shadow: 0 8px 18px rgba(30,18,70,0.30); background-image: conic-gradient(from 40deg, rgba(255,255,255,0) 0deg, rgba(255,255,255,0.35) 30deg, rgba(255,255,255,0) 70deg, rgba(255,255,255,0) 200deg, rgba(255,255,255,0.25) 230deg, rgba(255,255,255,0) 260deg), radial-gradient(circle, #C7C0E8 0 60%, #A99FDA 100%); transform: rotate(-20deg); display: flex; align-items: center; justify-content: center">
+    <div style="width: 30px; height: 30px; border-radius: 50%; background: #ffffff; box-shadow: inset 0 0 0 7px #E7E3F6"></div>
+    <div style="position: absolute; left: 84px; top: 40px; font-family: 'Archivo Black', system-ui, sans-serif; font-size: 13px; letter-spacing: 3px; color: #2D2550; transform: rotate(90deg); transform-origin: left top; text-align: center">CLICK CLUB</div>
+  </div>
+
+  <!-- snap letter tiles -->
+  <div style="position: absolute; left: 140px; top: 1634px; display: flex; align-items: flex-end; gap: 4px; filter: drop-shadow(0 8px 10px rgba(30,18,70,0.30))">
+    <div style="width: 84px; height: 96px; box-sizing: border-box; padding: 9px; background: #A79FDA; border: 4px solid #ffffff; transform: rotate(-6deg)">
+      <div style="width: 100%; height: 100%; background: #FAFAFC; display: flex; align-items: center; justify-content: center; font-family: 'Archivo Black', system-ui, sans-serif; font-size: 50px; line-height: 1; color: #2A2A33">S</div>
+    </div>
+    <div style="width: 92px; height: 108px; box-sizing: border-box; padding: 9px; background: #A79FDA; border: 4px solid #ffffff; transform: translateY(-14px) rotate(4deg)">
+      <div style="width: 100%; height: 100%; background: #FAFAFC; display: flex; align-items: center; justify-content: center; font-family: 'Archivo Black', system-ui, sans-serif; font-size: 58px; line-height: 1; color: #2A2A33">O</div>
+    </div>
+    <div style="width: 86px; height: 100px; box-sizing: border-box; padding: 9px; background: #A79FDA; border: 4px solid #ffffff; transform: translateY(-4px) rotate(-3deg)">
+      <div style="width: 100%; height: 100%; background: #FAFAFC; display: flex; align-items: center; justify-content: center; font-family: 'Archivo Black', system-ui, sans-serif; font-size: 52px; line-height: 1; color: #2A2A33">U</div>
+    </div>
+    <div style="width: 90px; height: 104px; box-sizing: border-box; padding: 9px; background: #A79FDA; border: 4px solid #ffffff; transform: translateY(18px) rotate(12deg)">
+      <div style="width: 100%; height: 100%; background: #FAFAFC; display: flex; align-items: center; justify-content: center; font-family: 'Archivo Black', system-ui, sans-serif; font-size: 54px; line-height: 1; color: #2A2A33">R</div>
+    </div>
+  </div>
+
+  <!-- cassette -->
+  <div style="position: absolute; left: 14px; top: 1702px; width: 164px; height: 108px; background: #ffffff; border-radius: 14px; box-shadow: 0 6px 14px rgba(30,18,70,0.30); transform: rotate(-8deg); display: flex; align-items: center; justify-content: center">
+    <svg aria-hidden="true" width="148" height="92" viewBox="0 0 148 92">
+      <rect x="2" y="2" width="144" height="88" rx="10" fill="#8C80D6" stroke="#2D2550" stroke-width="2"></rect>
+      <rect x="12" y="10" width="124" height="54" rx="5" fill="#B9B0EA" stroke="#2D2550" stroke-width="1.5"></rect>
+      <rect x="44" y="36" width="60" height="18" rx="4" fill="#2D2550"></rect>
+      <circle cx="56" cy="45" r="6" fill="#E3DEF8"></circle>
+      <circle cx="92" cy="45" r="6" fill="#E3DEF8"></circle>
+      <path d="M32 90l8-16h68l8 16" fill="#7A6EC6" stroke="#2D2550" stroke-width="1.5"></path>
+    </svg>
+    <div style="position: absolute; left: 0; right: 0; top: 18px; font-family: 'Archivo Black', system-ui, sans-serif; font-size: 13px; letter-spacing: 3px; line-height: 1; color: #24184F; text-align: center">Deja Vu</div>
+  </div>
+
+  <!-- now playing sticker -->
+  <div style="position: absolute; left: 382px; top: 1712px; width: 236px; height: 96px; box-sizing: border-box; padding: 8px; background: #ffffff; border-radius: 12px; box-shadow: 0 6px 14px rgba(30,18,70,0.30); transform: rotate(-2deg); display: flex; flex-direction: column; gap: 4px">
+    <div style="align-self: flex-end; font-family: 'Caveat', cursive; font-size: 20px; line-height: 1; color: #24184F; padding-right: 6px">now playing</div>
+    <div style="flex: 1; border-radius: 6px; background: #8C80D6; display: flex; align-items: center; gap: 12px; padding: 0 12px">
+      <svg aria-hidden="true" width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="14" fill="#24184F"></circle><path d="M12 9.5l9 5.5-9 5.5z" fill="#ffffff"></path></svg>
+      <svg aria-hidden="true" width="150" height="34" viewBox="0 0 150 34" fill="#24184F">
+        <rect x="0" y="12" width="4" height="10" rx="2"></rect><rect x="8" y="6" width="4" height="22" rx="2"></rect><rect x="16" y="14" width="4" height="6" rx="2"></rect><rect x="24" y="2" width="4" height="30" rx="2"></rect><rect x="32" y="9" width="4" height="16" rx="2"></rect><rect x="40" y="13" width="4" height="8" rx="2"></rect><rect x="48" y="4" width="4" height="26" rx="2"></rect><rect x="56" y="10" width="4" height="14" rx="2"></rect><rect x="64" y="0" width="4" height="34" rx="2"></rect><rect x="72" y="8" width="4" height="18" rx="2"></rect><rect x="80" y="12" width="4" height="10" rx="2"></rect><rect x="88" y="5" width="4" height="24" rx="2"></rect><rect x="96" y="14" width="4" height="6" rx="2"></rect><rect x="104" y="3" width="4" height="28" rx="2"></rect><rect x="112" y="10" width="4" height="14" rx="2"></rect><rect x="120" y="7" width="4" height="20" rx="2"></rect><rect x="128" y="13" width="4" height="8" rx="2"></rect><rect x="136" y="9" width="4" height="16" rx="2"></rect><rect x="144" y="12" width="4" height="10" rx="2"></rect>
+      </svg>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"bg":{"editor":"color","default":"#7F66CC","options":["#7F66CC","#F7AFA0","#A795E6","#9FC2F0"]},"$preview":{"width":640,"height":1840}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      bg: this.props.bg ?? '#7F66CC'
+    };
+  }
+}
+</script>
+</body>
+</html>

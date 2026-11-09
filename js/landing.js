@@ -19,7 +19,7 @@
 
   var lib = $('eras'), stage = $('libStage'), world = $('libWorld'), track = $('libTrack'), info = $('libInfo'), notes = $('libNotes');
 
-  var BOOTH_TOKENS = ['front', 'side', 'top', 'band', 'band-ink', 'bulb', 'bulb-glow', 'interior', 'rod', 'panel', 'panel-ink', 'sign', 'sign-ink', 'sign-edge', 'curtain', 'display', 'disp-style', 'disp-weight'];
+  var BOOTH_TOKENS = ['front', 'side', 'top', 'band', 'band-ink', 'bulb', 'bulb-glow', 'interior', 'rod', 'panel', 'panel-ink', 'sign', 'sign-ink', 'sign-edge', 'curtain', 'disp-style', 'disp-weight'];
   track.innerHTML = ERAS.map(function (e, i) {
     var tokens = BOOTH_TOKENS.map(function (k) { return '--' + k + ':' + e.vars[k]; }).join(';');
     return '<a class="car" data-i="' + i + '" href="' + E.booth + '" style="' + esc(tokens) + '" aria-label="' + esc(e.name) + ', inspired by ' + esc(e.artist) + '. Step inside.">' +
@@ -83,10 +83,8 @@
     var e = ERAS[i];
     $('libName').textContent = e.name;
     $('libArtist').textContent = e.artist;
-    $('libCap').textContent = '“' + e.caption + '”';
-    $('libMoods').innerHTML = e.moods.map(function (m) {
-      return '<div><b aria-label="' + m[1] + ' out of 5">' + '★★★★★'.slice(0, m[1]) + '☆☆☆☆☆'.slice(0, 5 - m[1]) + '</b><span>' + esc(m[0]) + '</span></div>';
-    }).join('');
+    $('libFrames').textContent = e.designs ? e.designs.map(function (d) { return d.name; }).join(', ') : 'Coming soon';
+    $('libCap').textContent = e.caption;
     $('libGo').setAttribute('aria-label', 'Step inside ' + e.name);
     $('libPrev').disabled = i === 0; $('libNext').disabled = i === N - 1;
     stage.style.setProperty('--tint', e.bg);
